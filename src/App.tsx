@@ -55,9 +55,12 @@ type Emails= {
 function App() {
   // Use initialEmails for state
   // console.log(initialEmails)
+
   const [emails, setEmails]= useState(initialEmails)
   const unreadEmails=emails.filter(email=> !email.read)
   const starredEmails=emails.filter(email=> email.starred)
+  const [hideRead, setHideRead]=useState(false)
+  const emailtoDisplay= hideRead? unreadEmails: emails
   function toggleEmailRead (email: Emails) {
    
     const emailCopy = structuredClone(emails)
@@ -76,6 +79,7 @@ function App() {
 
     setEmails(emailCopy)
   }
+
 
   return (
     <div className="app">
@@ -107,15 +111,18 @@ function App() {
             <input
               id="hide-read"
               type="checkbox"
-              checked={false}
-            // onChange={() => {}}
+              checked={hideRead}
+            onChange={() => {
+            {setHideRead(!hideRead)}
+            }}
             />
           </li> 
           
         </ul>
       
       </nav>
-       <main className="emails"> {emails.map(email=>(
+       <main className="emails"> 
+       {emailtoDisplay.map(email=>(
         <ul className={email.read? "email read": "email unread"}>
          <li><input            
               type="checkbox"
