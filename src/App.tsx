@@ -56,6 +56,8 @@ function App() {
   // Use initialEmails for state
   // console.log(initialEmails)
   const [emails, setEmails]= useState(initialEmails)
+  const unreadEmails=emails.filter(email=> !email.read)
+  const starredEmails=emails.filter(email=> email.starred)
   function toggleEmailRead (email: Emails) {
    
     const emailCopy = structuredClone(emails)
@@ -87,7 +89,7 @@ function App() {
           }}
           >
             <span className="label">Inbox</span>
-            <span className="count">?</span>
+            <span className="count">{unreadEmails.length}</span>
           
           </li>
           <li
@@ -97,7 +99,7 @@ function App() {
 
           
             <span className="label">Starred</span>
-            <span className="count">?</span>
+            <span className="count">{starredEmails.length}</span>
           </li>
 
           <li className="item toggle">
