@@ -65,6 +65,15 @@ function App() {
 
     setEmails(emailCopy)
   }
+  function toggleEmailStar (email: Emails) {
+   
+    const emailCopy = structuredClone(emails)
+
+    const targetEmail =emailCopy.find(target => target.id === email.id)
+    targetEmail.starred= !targetEmail.starred
+
+    setEmails(emailCopy)
+  }
 
   return (
     <div className="app">
@@ -120,6 +129,9 @@ function App() {
           className='star-checkbox'
               type="checkbox"
               checked={email.starred}
+              onClick={()=>{
+                toggleEmailStar (email)
+              }}
             /></li>
            <li>{email.sender}</li>
        <li className='title' >{ email.title} </li>
