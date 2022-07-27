@@ -61,7 +61,7 @@ function App() {
     const emailCopy = structuredClone(emails)
 
     const targetEmail =emailCopy.find(target => target.id === email.id)
-    targetEmail.completed = !targetEmail.completed
+     email.read= !email.read
 
     setEmails(emailCopy)
   }
